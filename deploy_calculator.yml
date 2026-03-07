@@ -1,0 +1,19 @@
+---
+- name: Deploy Scientific Calculator
+  hosts: local
+  become: yes
+  tasks:
+
+    - name: Pull latest Docker image from Docker Hub
+      docker_image:
+        name: dakshminda/scientific-calculator:latest
+        source: pull
+
+    - name: Start calculator container
+      docker_container:
+        name: scientific_calculator
+        image: dakshminda/scientific-calculator:latest
+        state: started
+        restart_policy: unless-stopped
+        tty: yes
+        interactive: yes
