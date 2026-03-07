@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/daksh-107/scientific-calculator-devops.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'gcc calculator.c -o calculator -lm'
@@ -32,13 +26,13 @@ pipeline {
 
     post {
         success {
-            mail to: 'developer@example.com',
+            mail to: 'dakshminda10@gmail.com',
                  subject: "Build Successful",
                  body: "Jenkins build completed successfully."
         }
 
         failure {
-            mail to: 'developer@example.com',
+            mail to: 'dakshminda10@gmail.com',
                  subject: "Build Failed",
                  body: "Jenkins build failed. Check Jenkins logs."
         }
