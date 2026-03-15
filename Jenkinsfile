@@ -23,11 +23,18 @@ pipeline {
         }
 
         stage('Docker Push') {
-            steps {
-                sh 'docker tag scientific-calculator dakshminda/scientific-calculator:latest'
-                sh 'docker push dakshminda/scientific-calculator:latest'
-            }
+    steps {
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub-creds',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASS'
+        )]) {
+
+            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+            sh 'docker push dakshminda/scientific-calculator:latest'
+          }
         }
+    }
 
     }
 
