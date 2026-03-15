@@ -22,6 +22,13 @@ pipeline {
             }
         }
 
+        stage('Docker Push') {
+            steps {
+                sh 'docker tag scientific-calculator dakshminda/scientific-calculator:latest'
+                sh 'docker push dakshminda/scientific-calculator:latest'
+            }
+        }
+
     }
 
     post {
